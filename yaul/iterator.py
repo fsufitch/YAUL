@@ -12,13 +12,14 @@ def iter_chunks(collection, chunksize):
     
     def get_chunk():
         buffer = []
-        while len(buffer)<chunksize:
-            try:
-                buffer.append(iterator.__next__())
-            except StopIteration:
-                if not buffer: # Couldn't even read one value
-                    raise OutOfInputException()
+        counter = 0
+        for value in iterator:
+            buffer.append(value)
+            counter += 1
+            if counter >= chunksize:
                 break
+        if not counter:
+            raise OutOfInputException()
         return buffer
     
     while True:
