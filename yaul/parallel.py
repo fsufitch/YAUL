@@ -43,7 +43,7 @@ class GenericPool(object):
             final_results = [x for x in reduced_results]
             return final_results
         else:
-            return iter(final_results)
+            return iter(reduced_results)
         
     def __null_reducer(self, vals):
         return vals
@@ -56,13 +56,14 @@ class GenericPool(object):
         return pool.imap(mapfunc, collection)
     
     def __map_multiprocessed(self, mapfunc, collection):
-        from multiprocessing import Pool
-        procs = self.num_threads or os.cpu_count() or 1
+        from multiprocessing import Pool, cpu_count
+        procs = self.num_threads or cpu_count() or 1
         pool = Pool(procs)
         return self.__map_pool(mapfunc, collection, pool)
     
     def __map_threaded(self, mapfunc, collection):
         from multiprocessing.pool import ThreadPool
-        threads = self.num_threads or os.cpu_count() or 1
+        from multiprocessing import cpu_count
+        threads = self.num_threads or cpu_count() or 1
         pool = ThreadPool(threads)
         return self.__map_pool(mapfunc, collection, pool)
