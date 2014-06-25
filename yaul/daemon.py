@@ -4,7 +4,7 @@ Generic linux daemon base class for python 3.x.
 Modified, originally from http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
 """
 
-import sys, os, time, atexit, signal
+import logging, sys, os, time, atexit, signal, traceback
 
 class Daemon(object):
 	"""A generic daemon class.
@@ -135,4 +135,8 @@ def run_as_service(daemon):
 	if len(sys.argv)<2 or sys.argv[1] not in ('start', 'stop', 'restart'):
 		print("Please specify 'start', 'stop', or 'restart'")
 	else:
-		meths[sys.argv[1]]()
+		try:
+			meths[sys.argv[1]]()
+		except Exception as e:
+			logging.error(sys.exc_info())
+			logging.error(traceback.format_exc())
