@@ -6,7 +6,7 @@ Modified, originally from http://www.jejik.com/articles/2007/02/a_simple_unix_li
 
 import sys, os, time, atexit, signal
 
-class Daemon:
+class Daemon(object):
 	"""A generic daemon class.
 
 	Usage: subclass the daemon class and override the run() method."""
@@ -123,3 +123,16 @@ class Daemon:
 		
 		It will be called after the process has been daemonized by 
 		start() or restart()."""
+		raise NotImplementedError('run() not implemented. Please subclass Daemon to implement it.')
+
+def run_as_service(daemon):
+	meths = {
+		'start': daemon.start,
+		'stop': daemon.stop,
+		'restart': daemon.restart,
+	}
+
+	if len(sys.argv)<2 or sys.argv[1] not in ('start', 'stop', 'restart'):
+		print("Please specify 'start', 'stop', or 'restart'")
+	else:
+		meths[sys.argv[1]]()
