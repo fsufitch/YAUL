@@ -123,7 +123,7 @@ class Daemon(object):
 		
 		It will be called after the process has been daemonized by 
 		start() or restart()."""
-		raise NotImplementedError('run() not implemented. Please subclass Daemon to implement it.')
+		raise NotImplementedError('Daemon.run() not implemented. Please subclass Daemon to implement it.')
 
 def run_as_service(daemon):
 	meths = {
