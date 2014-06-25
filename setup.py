@@ -1,7 +1,7 @@
 from setuptools import setup, Extension, find_packages
 
 setup(name='yaul',
-      version='0.2',
+      version='0.3',
       author='Filip Sufitchi',
       author_email="fsufitchi@gmail.com",
       description="Yet Another Utility Library",
