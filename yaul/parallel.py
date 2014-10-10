@@ -22,7 +22,7 @@ class GenericPool(object):
             raise ValueError("Unrecognized parallelism type", parallel_type)
         self.partype = parallel_type
         self.num_threads = None
-
+        self.pool = None
 
     def get_mapper(self):
         if self.partype == SERIAL:
@@ -58,12 +58,14 @@ class GenericPool(object):
     def __map_multiprocessed(self, mapfunc, collection):
         from multiprocessing import Pool, cpu_count
         procs = self.num_threads or cpu_count() or 1
-        pool = Pool(procs)
-        return self.__map_pool(mapfunc, collection, pool)
+        if not self.pool:
+            self.pool = Pool(procs)
+        return self.__map_pool(mapfunc, collection, self.pool)
     
     def __map_threaded(self, mapfunc, collection):
         from multiprocessing.pool import ThreadPool
         from multiprocessing import cpu_count
         threads = self.num_threads or cpu_count() or 1
-        pool = ThreadPool(threads)
-        return self.__map_pool(mapfunc, collection, pool)
+        if not self.pool:
+            self.pool = ThreadPool(threads)
+        return self.__map_pool(mapfunc, collection, self.pool)
