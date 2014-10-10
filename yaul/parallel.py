@@ -57,7 +57,7 @@ class GenericPool(object):
     
     def __map_multiprocessed(self, mapfunc, collection):
         from multiprocessing import Pool, cpu_count
-        procs = self.num_threads or cpu_count() or 1
+        procs = self.num_threads or (min(cpu_count(), 16) if cpu_count() else 1)
         if not self.pool:
             self.pool = Pool(procs)
         return self.__map_pool(mapfunc, collection, self.pool)
@@ -65,7 +65,7 @@ class GenericPool(object):
     def __map_threaded(self, mapfunc, collection):
         from multiprocessing.pool import ThreadPool
         from multiprocessing import cpu_count
-        threads = self.num_threads or cpu_count() or 1
+        procs = self.num_threads or (min(cpu_count(), 16) if cpu_count() else 1)
         if not self.pool:
             self.pool = ThreadPool(threads)
         return self.__map_pool(mapfunc, collection, self.pool)
