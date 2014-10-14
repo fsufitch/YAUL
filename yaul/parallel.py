@@ -44,7 +44,12 @@ class GenericPool(object):
             return final_results
         else:
             return iter(reduced_results)
-        
+
+    def dump_pool(self):
+        if self.pool:
+            self.pool.close()
+            self.pool = None
+
     def __null_reducer(self, vals):
         return vals
 
