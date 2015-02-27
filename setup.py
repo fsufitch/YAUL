@@ -7,6 +7,7 @@ setup(name='yaul',
       description="Yet Another Utility Library",
       url="https://github.com/fsufitch/YAUL",
       packages=['yaul'],
+      package_dir={'':'src'},
       entry_points = {
         },
 
