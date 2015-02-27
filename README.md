@@ -47,11 +47,11 @@ A brief example:
     from yaul.daemon import Daemon, run_as_service
     class TimeWriterDaemon(Daemon):
         def run(self):
-	    import time
-	    while True:
-	        time.sleep(1)
-		with open("/tmp/time.txt", "w") as f:
-		    f.write(str(time.time()))
+            import time
+            while True:
+                time.sleep(1)
+                with open("/tmp/time.txt", "w") as f:
+                    f.write(str(time.time()))
 
     d = TimeWriterDaemon("/tmp/timedaemon.pid")
     run_as_service(d)
