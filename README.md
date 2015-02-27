@@ -7,7 +7,7 @@ are intended to be as lightweight as possible.
 
 The documentation sections below provide some details on each
 component's usage and some sample code. More comprehensive examples
-can be found in the (demos/)[./demos/] directory.
+can be found in the [demos/](./demos/) directory.
 
 yaul.cache
 ----------
