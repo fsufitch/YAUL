@@ -11,5 +11,5 @@ setup(name='yaul',
       entry_points = {
         },
 
-      install_requires=[],
+      install_requires=['python-daemon', 'psutil'],
       )

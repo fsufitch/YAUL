@@ -1,2 +1,5 @@
-# Nothing here
+python-daemon
+psutil
+
+# Testing
 nosetests
