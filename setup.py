@@ -1,7 +1,7 @@
 from setuptools import setup, Extension, find_packages
 
 setup(name='yaul',
-      version='0.4.1',
+      version='0.4.2',
       author='Filip Sufitchi',
       author_email="fsufitchi@gmail.com",
       description="Yet Another Utility Library",
@@ -11,5 +11,5 @@ setup(name='yaul',
       entry_points = {
         },
 
-      install_requires=['python-daemon', 'psutil'],
+      install_requires=['contextlib2', 'python-daemon', 'psutil'],
       )

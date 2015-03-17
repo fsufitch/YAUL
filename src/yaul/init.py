@@ -25,6 +25,13 @@
 
 import argparse, contextlib, daemon, os, psutil, subprocess, sys, time
 
+# Include ExitStack context into contextlib for Python 2
+try:
+    from contextlib2 import ExitStack
+    contextlib.ExitStack = ExitStack
+except ImportError:
+    pass
+
 class InitService(object):
     def __init__(self, lockfile,
                  executable, args=[], prog_name=None,
